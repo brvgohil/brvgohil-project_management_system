@@ -81,7 +81,62 @@ def dashboard():
     return render_template('dashboard.html')
 
 @app.route('/add_employee', methods=['GET', 'POST'])
+
+
 def add_employee():
     if request.method == 'POST':
         name = request.form['name']
         email = request.
+class Employee:
+    def __init__(self, emp_id, name, email, role):
+        self.emp_id = emp_id
+        self.name = name
+        self.email = email
+        self.role = role
+
+    def update_details(self, name=None, email=None, role=None):
+        if name:
+            self.name = name
+        if email:
+            self.email = email
+        if role:
+            self.role = role
+class Attendance:
+    def __init__(self, emp_id, date, in_time=None, out_time=None):
+        self.emp_id = emp_id
+        self.date = date
+        self.in_time = in_time
+        self.out_time = out_time
+
+    def mark_attendance(self, in_time, out_time=None):
+        self.in_time = in_time
+        self.out_time = out_time
+class Leave:
+    def __init__(self, emp_id, start_date, end_date, status='Pending'):
+        self.emp_id = emp_id
+        self.start_date = start_date
+        self.end_date = end_date
+        self.status = status
+
+    def approve_leave(self):
+        self.status = 'Approved'
+
+    def disapprove_leave(self):
+        self.status = 'Disapproved'
+class Payroll:
+    def __init__(self, emp_id, salary):
+        self.emp_id = emp_id
+        self.salary = salary
+
+    def calculate_salary(self):
+        # Add your salary calculation logic here
+        pass
+
+    def generate_payslip(self):
+        # Add code to generate payslip
+        pass
+class ReportGenerator:
+    @staticmethod
+    def generate_employee_list(employees):
+        for emp in employees:
+            print(emp.name, emp.email, emp.role)
